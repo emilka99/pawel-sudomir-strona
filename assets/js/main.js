@@ -178,5 +178,37 @@
     requestAnimationFrame(() => (gallery.scrollLeft = mid.offsetLeft - (gallery.clientWidth - mid.offsetWidth) / 2));
   }
 
+  /* Formularz kontaktowy: wysyłka na FORM_ENDPOINT (np. Formspree) albo mailto */
+  $$('[data-form]').forEach(form => {
+    const status = $('.f-status', form);
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      let ok = true;
+      $$('input[required], textarea[required]', form).forEach(el => {
+        const bad = el.type === 'checkbox' ? !el.checked : !el.value.trim() || (el.type === 'email' && !/^\S+@\S+\.\S+$/.test(el.value));
+        (el.type === 'checkbox' ? el.closest('label') : el).classList.toggle('invalid', bad);
+        if (bad) ok = false;
+      });
+      if (!ok) { status.textContent = 'Uzupełnij zaznaczone pola.'; return; }
+      const data = new FormData(form);
+      const endpoint = form.dataset.endpoint;
+      if (endpoint) {
+        status.textContent = 'Wysyłam…';
+        try {
+          const res = await fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+          if (!res.ok) throw new Error();
+          form.reset();
+          status.textContent = 'Dziękuję! Odezwę się w ciągu 1–2 dni roboczych.';
+        } catch {
+          status.textContent = 'Nie udało się wysłać. Napisz bezpośrednio: ' + form.dataset.email;
+        }
+      } else {
+        const body = `${data.get('message')}\n\n${data.get('name')}\n${data.get('email')}${data.get('phone') ? '\n' + data.get('phone') : ''}`;
+        location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent('Kontakt ze strony — ' + data.get('name'))}&body=${encodeURIComponent(body)}`;
+        status.textContent = 'Otwieram program pocztowy…';
+      }
+    });
+  });
+
   root.classList.add('js');
 })();

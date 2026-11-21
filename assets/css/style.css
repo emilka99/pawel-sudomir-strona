@@ -6,6 +6,8 @@
 @font-face{font-family:"Space Grotesk";font-style:normal;font-display:swap;font-weight:300 700;src:url(../fonts/space-grotesk-latin-ext-wght-normal.woff2) format("woff2-variations");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
 @font-face{font-family:"Space Grotesk";font-style:normal;font-display:swap;font-weight:300 700;src:url(../fonts/space-grotesk-latin-wght-normal.woff2) format("woff2-variations");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 
+@font-face{font-family:"Inter";font-style:normal;font-display:swap;font-weight:100 900;src:url(../fonts/inter-latin-ext-wght-normal.woff2) format("woff2-variations");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Inter";font-style:normal;font-display:swap;font-weight:100 900;src:url(../fonts/inter-latin-wght-normal.woff2) format("woff2-variations");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 :root{
   --bg:#E2E1E0;        /* tło strony */
   --ink:#16140F;       /* tekst główny */
@@ -451,3 +453,270 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .review blockquote{font-size:17px;line-height:1.5}
 .stat p{font-size:14px}
 .about-text .body{font-size:17px;line-height:1.55;color:var(--ink-2)}
+
+/* =========================================================
+   Runda 3: akcent kolorystyczny, logo PS, hero z portretem,
+   „Brzmi znajomo?”, wartości, kroki, formularz
+   ========================================================= */
+:root{
+  --accent:#D9BBAA;      /* pudrowa glina — kolor dodatkowy marki */
+  --accent-l:#EBDCD2;    /* jasna wersja na tła */
+  --accent-d:#9E6A57;    /* ciemna wersja na tekst / detale */
+}
+
+/* logo / monogram */
+.brand{flex-direction:row;align-items:center;gap:12px}
+.brand-txt{display:flex;flex-direction:column;line-height:1.2}
+.mono{width:44px;height:44px;flex:none}
+.mono text{font-family:"Space Grotesk",sans-serif}
+.mono-dot{fill:var(--accent)}
+.brand-mono .brand-txt{display:none}
+
+/* hero z portretem */
+.hero-split{display:grid;grid-template-columns:1fr 1fr;height:calc(100svh - 76px);min-height:600px;max-height:860px;background:var(--dark)}
+.hero-split::after{display:none}
+.hs-text{position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:center;padding:48px clamp(24px,4vw,64px) 64px max(var(--pad),calc((100vw - var(--max))/2 + var(--pad)))}
+.hs-text .blob{position:absolute;z-index:-1;left:25%;bottom:-220px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(217,187,170,.22),rgba(217,187,170,0) 70%);filter:blur(30px);animation:blob 14s ease-in-out infinite}
+.hs-inner{display:flex;flex-direction:column}
+.hero-split h1{font-size:clamp(60px,7.6vw,120px)}
+.hero-split .lead{max-width:520px;color:var(--nude)}
+.hs-photo{position:relative;overflow:hidden;background:var(--nude)}
+.hs-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;filter:saturate(.9);animation:heroZoom 2.4s var(--ease) both}
+.hs-photo::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,var(--dark) 0%,rgba(35,22,11,.85) 8%,rgba(35,22,11,.45) 22%,rgba(35,22,11,.12) 42%,rgba(35,22,11,0) 60%)}
+.hero-split .btn-glass{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25)}
+.hero-tag{background:rgba(217,187,170,.16)}
+
+/* Brzmi znajomo? */
+.ch-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.ch{display:flex;flex-direction:column;justify-content:space-between;gap:28px;min-height:220px;padding:28px;border-radius:var(--r);background:var(--off);transition:background .45s var(--ease),transform .45s var(--ease)}
+.ch-q{font-weight:300;font-size:clamp(20px,1.65vw,24px);line-height:1.3;letter-spacing:-.02em;color:var(--ink)}
+.ch-to{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-d)}
+.ch-to i{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--accent-l);color:var(--accent-d);transition:transform .4s var(--ease),background .3s}
+.ch-to i svg{width:14px;height:14px}
+.ch:hover{background:var(--accent-l);transform:translateY(-3px)}
+.ch:hover .ch-to i{background:var(--accent-d);color:var(--off);transform:rotate(-45deg)}
+
+/* hasło: akcent */
+.statement strong{color:var(--accent-d)}
+
+/* podstrony: Brzmi znajomo, kroki, wartości */
+.sp-pains{padding-top:clamp(64px,8vw,112px);display:grid;grid-template-columns:1fr 1.4fr;gap:0 clamp(40px,6vw,112px);align-items:start}
+.sp-pains .kicker,.sp-pains .sp-h{grid-column:1}
+.sp-pains .sp-h{margin-bottom:0}
+.sp-pains ul{grid-column:2;grid-row:1/span 2;list-style:none;display:flex;flex-direction:column;gap:12px}
+.sp-pains li{padding:22px 26px;border-radius:var(--r);background:var(--accent-l);font-weight:300;font-size:clamp(19px,1.6vw,23px);line-height:1.35;letter-spacing:-.015em;color:var(--ink)}
+.sp-steps{padding-top:clamp(64px,8vw,112px)}
+.sp-steps ol{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,40px)}
+.step{border-top:1px solid var(--line);padding-top:20px}
+.step small{display:block;font-size:13px;font-weight:500;color:var(--accent-d);margin-bottom:22px}
+.step b{display:block;font-weight:400;font-size:clamp(22px,2vw,28px);letter-spacing:-.025em;line-height:1.1}
+.step p{margin-top:12px;font-size:16px;line-height:1.5;color:var(--ink-2);max-width:360px}
+.sp-grid-1{grid-template-columns:1fr}
+.sp-grid-1 .lines{display:grid;grid-template-columns:1fr 1fr;column-gap:40px;border-top:0}
+.sp-grid-1 .lines li:nth-child(-n+2){border-top:1px solid var(--line)}
+.sp-values{padding-top:clamp(64px,8vw,112px)}
+.values{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.val{padding:28px;border-radius:var(--r);background:var(--off);min-height:190px;display:flex;flex-direction:column;gap:14px;transition:background .4s}
+.val b{font-weight:400;font-size:clamp(21px,1.8vw,26px);letter-spacing:-.025em;display:flex;align-items:center;gap:12px}
+.val b::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+.val p{font-size:16px;line-height:1.5;color:var(--ink-2)}
+.val:hover{background:var(--accent-l)}
+
+/* kontakt z formularzem */
+.contact{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}
+.contact .note{max-width:420px}
+.c-lines{margin-top:36px;display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,.18)}
+.c-line{display:grid;grid-template-columns:90px minmax(0,1fr);gap:16px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.18);transition:padding .35s var(--ease),color .3s}
+.c-line small{font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-l);padding-top:4px}
+.c-line span{font-weight:300;font-size:clamp(17px,1.4vw,21px);letter-spacing:-.02em;overflow-wrap:anywhere}
+.c-line:hover{padding-left:8px;color:var(--accent)}
+.c-form{display:flex;flex-direction:column;gap:14px}
+.f{display:flex;flex-direction:column;gap:6px}
+.f label{font-size:13px;color:var(--muted-l)}
+.f label em{font-style:normal;opacity:.7}
+.f input,.f textarea{font:inherit;font-size:16px;color:var(--off);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:14px 16px;outline:none;transition:border-color .25s,background .25s;resize:vertical}
+.f input:focus,.f textarea:focus{border-color:var(--accent);background:rgba(255,255,255,.09)}
+.f .invalid,.f input.invalid,.f textarea.invalid{border-color:#E39A86}
+.f textarea::placeholder{color:rgba(255,255,255,.35)}
+.consent{display:flex;gap:12px;align-items:flex-start;font-size:13px;line-height:1.45;color:var(--muted-l);cursor:pointer}
+.consent input{margin-top:2px;width:18px;height:18px;flex:none;accent-color:var(--accent)}
+.consent a{text-decoration:underline}
+.consent.invalid{color:#E39A86}
+.c-form .btn{align-self:flex-start;margin-top:6px}
+.f-status{font-size:14px;color:var(--accent);min-height:1.2em}
+
+@media (max-width:1100px){.ch-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.values{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:960px){
+  .hero-split{grid-template-columns:1fr;height:auto;max-height:none;min-height:0}
+  .hs-text{padding:56px var(--pad) 40px}
+  .hs-photo{height:min(105vw,520px)}
+  .hs-photo img{object-position:50% 25%}
+  .hs-photo::before{background:linear-gradient(180deg,var(--dark) 0%,rgba(35,22,11,.7) 14%,rgba(35,22,11,.25) 38%,rgba(35,22,11,0) 60%)}
+  .sp-pains{grid-template-columns:1fr}
+  .sp-pains ul{grid-column:1;grid-row:auto;margin-top:28px}
+  .sp-steps ol{grid-template-columns:1fr}
+  .sp-grid-1 .lines{grid-template-columns:1fr}
+  .sp-grid-1 .lines li:nth-child(2){border-top:0}
+  .contact{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .hero-split .hero-actions{margin-top:28px}
+  .ch-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;gap:12px}
+  .ch-grid::-webkit-scrollbar{display:none}
+  .ch{flex:0 0 78%;scroll-snap-align:start;min-height:200px}
+  .values{grid-template-columns:1fr}
+  .val{min-height:0}
+  .c-form .btn{align-self:stretch}
+}
+
+.sp-pains{grid-template-rows:auto 1fr}
+.sp-pains .sp-h{align-self:start}
+.mono circle{stroke:currentColor}
+
+/* =========================================================
+   Typografia: Inter (tekst, menu, przyciski) + Space Grotesk (duże nagłówki)
+   ========================================================= */
+:root{--f-body:"Inter",system-ui,-apple-system,sans-serif;--f-head:"Space Grotesk","Inter",sans-serif}
+body,button,input,textarea{font-family:var(--f-body)}
+body{letter-spacing:-.005em}
+.hero h1,.h-xl,.svc h3,.statement p,.sp-main h1,.sp-h,.contact h2,.passion .big,.stat .num,.o-row span,.legal h1,.mobile-menu nav a{font-family:var(--f-head)}
+.mono text{font-family:"Space Grotesk",sans-serif}
+/* Inter jest szerszy i ciemniejszy niż Space Grotesk — wyrównanie wag i rozmiarów */
+.hero .lead,.sp-main .lead,.sp-intro-text,.passion .txt,.review blockquote,.rd-body blockquote,.ch-q,.sp-pains li,.c-line span,.about-text .body{font-weight:300}
+.btn{letter-spacing:.1em;font-size:13px}
+.kicker{letter-spacing:.12em}
+.ch-q{font-size:clamp(18px,1.45vw,21px);line-height:1.4;letter-spacing:-.015em}
+.sp-pains li{font-size:clamp(17px,1.4vw,20px)}
+.step b,.val b{font-weight:500;font-size:clamp(18px,1.5vw,21px);letter-spacing:-.015em}
+.passion .sub{font-weight:500}
+
+/* =========================================================
+   Runda 4: paleta (Dark Chocolate / Khadi / Marlborough Blue /
+   Blackout / Bronco), logo, szerokie hero, lista wyzwań
+   ========================================================= */
+:root{
+  --bg:#DED9D0;        /* Khadi */
+  --ink:#1E1E1E;       /* Blackout */
+  --ink-2:#4A3F36;
+  --dark:#37261A;      /* Dark Chocolate */
+  --off:#ECE8E1;       /* jasne karty */
+  --cream:#F6F3EE;
+  --nude:#CFC8BC;
+  --muted:#8A8175;     /* Bronco (ciemniejszy, do tekstu) */
+  --bronco:#AAA194;    /* Bronco */
+  --muted-l:#C9C1B5;
+  --line:#1E1E1E;
+  --accent:#8AA2BA;    /* Marlborough Blue */
+  --accent-l:#D5DEE7;
+  --accent-d:#4E6780;
+}
+header.is-solid,.header.is-solid{background:rgba(222,217,208,.88)}
+
+/* logo */
+.logo-svg{height:38px;width:auto;display:block}
+.brand{color:inherit}
+.footer .container>span{display:flex;align-items:center;gap:10px}
+
+/* hero na pełną szerokość, zdjęcie z dużą ilością tła */
+.hero-wide{height:100vh;height:100svh;min-height:640px;max-height:940px;background:#C9C6CB;color:var(--ink)}
+.hero-wide::after{background:linear-gradient(90deg,rgba(222,217,208,.55) 0%,rgba(222,217,208,.25) 35%,rgba(222,217,208,0) 55%)}
+.hw-media{position:absolute;inset:-6% 0 0;will-change:transform}
+.hw-media img{width:100%;height:100%;object-fit:cover;object-position:52% 30%;animation:heroZoom 2.4s var(--ease) both}
+.hw-inner{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;padding-top:76px;padding-bottom:40px}
+.hero-wide .hero-tag{background:rgba(55,38,26,.08);color:var(--dark);border:1px solid rgba(55,38,26,.18);backdrop-filter:none}
+.hero-wide h1{color:var(--dark)}
+.hero-wide .lead{color:var(--ink-2);max-width:520px}
+.hero-wide .btn-dark{background:var(--dark);color:var(--cream)}
+.hero-wide .btn-line{border:1px solid rgba(55,38,26,.35);color:var(--dark);padding:10px 10px 10px 26px}
+.hero-wide .btn-line .ic{border-color:currentColor}
+.home .header:not(.is-solid){color:var(--dark)}
+.home .header:not(.is-solid) .nav .btn{background:var(--dark);color:var(--cream)}
+.home .header:not(.is-solid) .burger{background:var(--dark);color:var(--cream)}
+
+/* Brzmi znajomo — mniejsza lista zamiast kafelków */
+.h-md{font-weight:300;font-size:clamp(34px,3.6vw,52px);line-height:1;letter-spacing:-.035em;color:var(--ink);margin-top:14px}
+.challenges{display:grid;grid-template-columns:1fr 2fr;gap:clamp(32px,6vw,96px);align-items:start}
+.ch-head{position:sticky;top:110px}
+.ch-list{border-top:1px solid var(--line)}
+.ch-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:24px;padding:18px 0;border-bottom:1px solid rgba(30,30,30,.2);transition:padding .35s var(--ease)}
+.ch-row .ch-q{font-weight:300;font-size:clamp(17px,1.35vw,20px);line-height:1.4;letter-spacing:-.01em}
+.ch-row .ch-to{white-space:nowrap}
+.ch-row:hover{padding-left:10px}
+.ch-row:hover .ch-to i{background:var(--accent-d);color:var(--cream);transform:rotate(-45deg)}
+
+/* kontakt bez formularza */
+.contact-simple{grid-template-columns:minmax(0,1fr) minmax(0,560px);align-items:center}
+
+@media (max-width:960px){
+  .challenges{grid-template-columns:1fr;gap:24px}
+  .ch-head{position:static}
+  .contact-simple{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .hero-wide{max-height:none}
+  .hw-media img{object-position:76% 30%}
+  .hero-wide::after{background:linear-gradient(180deg,rgba(222,217,208,.7) 0%,rgba(222,217,208,.35) 38%,rgba(222,217,208,0) 58%)}
+  .hw-inner{justify-content:flex-start;padding-top:108px;padding-bottom:32px}
+  .hero-wide .hero-actions{margin-top:auto}
+  .hero-wide .btn-line{justify-content:center}
+  .ch-row{grid-template-columns:1fr;gap:10px}
+  .logo-svg{height:32px}
+}
+@media (max-width:760px){
+  .hero-wide{height:auto;min-height:0;display:flex;flex-direction:column;background:var(--bg)}
+  .hero-wide::after{display:none}
+  .hw-inner{order:1;height:auto;padding-top:104px;padding-bottom:28px}
+  .hero-wide .hero-actions{margin-top:24px}
+  .hw-media{order:2;position:relative;inset:auto;height:min(115vw,480px);transform:none!important;overflow:hidden}
+  .hw-media img{object-position:73% 20%}
+  .hw-media::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,var(--bg) 0%,rgba(222,217,208,0) 22%)}
+}
+
+/* ===== Round 5: about band, simpler card titles ===== */
+.hero-actions .btn .ic{display:none}
+.svc .nr{display:none}
+.svc h3{font-family:var(--f-body);font-weight:500;letter-spacing:-.02em;text-transform:none}
+.about-band{background:var(--accent-l);position:relative}
+.about-band .statement{padding-block:96px 24px}
+.about.about-2col{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(40px,7vw,112px);align-items:center;padding-block:48px 112px;padding-inline:var(--pad);max-width:1320px;margin-inline:auto}
+.about-2col .about-text{align-items:flex-start;text-align:left;padding-inline:0;max-width:none}
+.about-2col .about-text .body{max-width:620px;font-size:17px}
+.about-photo{margin:0;display:flex;flex-direction:column;gap:16px;width:100%;max-width:480px;justify-self:end}
+.about-photo .ph{border-radius:14px;overflow:hidden;aspect-ratio:4/5;isolation:isolate}
+.about-photo .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 25%;display:block}
+.akr{display:flex;flex-wrap:wrap;gap:10px}
+.akr-tag{background:#fff;border-radius:999px;height:56px;padding:8px 20px;display:inline-flex;align-items:center}
+.akr-tag img{height:100%;width:auto;max-width:110px;object-fit:contain;display:block}
+@media (max-width:760px){
+  .about-band .statement{padding-block:56px 8px}
+  .about.about-2col{grid-template-columns:1fr;padding-block:32px 64px;gap:32px}
+  .about-photo{justify-self:stretch;max-width:none}
+  .akr-tag{height:48px;padding:6px 14px}
+}
+.about.about-2col{max-width:none;margin-inline:0;padding-inline:0}
+.svc h3{font-size:clamp(24px,2.3vw,32px);line-height:1.15}
+.akr-tag{height:64px;padding:8px 18px}
+@media (max-width:760px){.akr-tag{height:52px;padding:6px 14px}}
+.about.about-2col{max-width:var(--max);margin-inline:auto;padding-inline:var(--pad)}
+
+/* ===== Round 6: service hero – "drawer" panel overlapping photo ===== */
+.sp-hero{background:var(--dark)}
+.sp-text{z-index:2;background:var(--dark);border-radius:0 clamp(28px,3vw,44px) clamp(28px,3vw,44px) 0;margin-right:calc(-1 * clamp(28px,3vw,44px))}
+.sp-photo{z-index:1}
+.sp-photo::before{display:none}
+.sp-photo img{filter:none}
+@media (max-width:760px){
+  .sp-text{border-radius:0 0 28px 28px;margin-right:0;margin-bottom:-28px}
+  .sp-photo{height:calc(min(70vw,420px) + 28px)}
+}
+
+/* ===== Round 7: service cards – description always visible ===== */
+.svc{min-height:0;gap:28px}
+.svc .bottom{padding-right:72px;gap:14px}
+.svc h3{font-weight:300;font-size:clamp(30px,3vw,42px);line-height:1.08;letter-spacing:-.03em;max-width:none}
+.svc .desc,.svc:hover .desc{display:block;opacity:1}
+.svc .desc>span{color:var(--ink-2);max-width:480px;font-size:16px;-webkit-line-clamp:3}
+.svc:hover .desc>span{color:var(--muted-l)}
+.svc .more{margin-top:6px}
+@media (max-width:960px),(hover:none){.svc .desc{display:block}}
+@media (max-width:760px){.svc .bottom{padding-right:0}.svc h3{padding-right:60px;font-size:30px}.svc .desc>span{font-size:15px}}
