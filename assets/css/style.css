@@ -626,8 +626,8 @@ header.is-solid,.header.is-solid{background:rgba(222,217,208,.88)}
 .hero-wide .hero-tag{background:rgba(55,38,26,.08);color:var(--dark);border:1px solid rgba(55,38,26,.18);backdrop-filter:none}
 .hero-wide h1{color:var(--dark)}
 .hero-wide .lead{color:var(--ink-2);max-width:520px}
-.hero-wide .btn-dark{background:var(--dark);color:var(--cream)}
-.hero-wide .btn-line{border:1px solid rgba(55,38,26,.35);color:var(--dark);padding:10px 10px 10px 24px}
+.hero-wide .btn-dark{background:var(--dark);color:var(--cream);padding:18px 32px}
+.hero-wide .btn-line{border:1px solid rgba(55,38,26,.35);color:var(--dark);padding:18px 32px}
 .hero-wide .btn-line .ic{border-color:currentColor}
 .home .header:not(.is-solid){color:var(--dark)}
 .home .header:not(.is-solid) .nav .btn{background:var(--dark);color:var(--cream)}
